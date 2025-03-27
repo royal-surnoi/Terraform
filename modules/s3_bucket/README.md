@@ -4,11 +4,11 @@ This Terraform module creates an AWS S3 bucket with customizable settings such a
 
 # Features
 
-**S3 Bucket Creation: Easily create and configure AWS S3 buckets.**
+-> S3 Bucket Creation: Easily create and configure AWS S3 buckets.
 
-Custom Tags: Add customizable tags (e.g., project, environment) to the S3 bucket for better resource management.
+-> Custom Tags: Add customizable tags (e.g., project, environment) to the S3 bucket for better resource management.
 
-Bucket ID Output: The module outputs the S3 bucket's ID for further use in your Terraform configurations or scripts.
+-> Bucket ID Output: The module outputs the S3 bucket's ID for further use in your Terraform configurations or scripts.
 
 Simple Integration: Can be easily integrated into any Terraform-based infrastructure deployment.
 
