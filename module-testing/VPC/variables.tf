@@ -10,12 +10,6 @@ variable "common_tags" {
   }
 }
 
-variable "vpc_tags" {
-  default = {}
-}
-variable "igt_tags" {
-  default = {}
-}
 variable "project_name" {
   default = "fusioniq"  
 }
@@ -23,12 +17,19 @@ variable "environment" {
   default = "dev"
 }
 
+variable "vpc_tags" {
+  default = {}
+}
+variable "igt_tags" {
+  default = {}
+}
+
 variable "cidr_public" {
-  default = ["10.0.1.0/24"]
+  default = ["10.0.1.0/24","10.0.2.0/24"]
 }
 
 variable "cidr_private" {
-  default = ["10.0.11.0/24"]
+  default = ["10.0.11.0/24","10.0.12.0/24"]
 }
 
 variable "cidr_database" {
