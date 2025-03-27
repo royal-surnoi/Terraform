@@ -68,16 +68,20 @@ Type: string
 Required: Yes
 
 tags: A map of tags to assign to the S3 bucket. This can include tags such as project, environment, etc.
+
 Type: map(string)
+
 Default: {} (empty map)
 
 # Outputs
 
 bucket_id: The unique ID of the created S3 bucket.
+
 Type: string
 
 # Example of Using the Module in Your Project
 
+```css
 `module "s3_bucket" {
   source      = "path_to_this_module"
   bucket_name = "unique-bucket-name"
@@ -91,6 +95,8 @@ Type: string
 output "bucket_id" {
   value = module.s3_bucket.bucket_id
 }`
+```
+
 
 
 
