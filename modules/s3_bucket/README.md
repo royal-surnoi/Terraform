@@ -30,7 +30,6 @@ This Terraform module utilizes AWS resources to create and manage an S3 bucket. 
 
 # Example: Create an S3 Bucket with Tags and Output Bucket ID
 
-```json
 module "s3_bucket" {
   source      = "path_to_this_module"
   
@@ -44,4 +43,4 @@ module "s3_bucket" {
   }
 }
 
-```
+
