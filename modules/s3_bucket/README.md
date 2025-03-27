@@ -28,7 +28,7 @@ This Terraform module utilizes AWS resources to create and manage an S3 bucket. 
 
 # Module Usage
 
-# Example: Create an S3 Bucket with Tags and Output Bucket ID
+Example: Create an S3 Bucket with Tags and Output Bucket ID
 
 ```css
 module "s3_bucket" {
@@ -40,4 +40,59 @@ module "s3_bucket" {
   }
 }
 ```
+
+Example Terraform Configuration (main.tf)
+
+```css
+module "s3_bucket" {
+  source      = "path_to_this_module"
+  bucket_name = "my-unique-bucket-name"
+  
+  tags = {
+    project     = "example-project"
+    environment = "production"
+  }
+}
+
+output "bucket_id" {
+  value = module.s3_bucket.bucket_id
+}
+```
+
+# Inputs
+
+The module accepts the following input variables:
+
+bucket_name: The name of the S3 bucket to be created.
+Type: string
+Required: Yes
+
+tags: A map of tags to assign to the S3 bucket. This can include tags such as project, environment, etc.
+Type: map(string)
+Default: {} (empty map)
+
+# Outputs
+
+bucket_id: The unique ID of the created S3 bucket.
+Type: string
+
+# Example of Using the Module in Your Project
+
+`module "s3_bucket" {
+  source      = "path_to_this_module"
+  bucket_name = "unique-bucket-name"
+  
+  tags = {
+    project     = "new-project"
+    environment = "staging"
+  }
+}
+
+output "bucket_id" {
+  value = module.s3_bucket.bucket_id
+}`
+
+
+
+
 
