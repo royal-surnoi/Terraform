@@ -1,10 +1,10 @@
 variable "vpc_id" {
-  default = "vpc-0d6e5535cf4beb00a"
+  default = "vpc-02f1b64639129a548"
 }
 
 variable "subnet_ids" {
   type = list(string)
-  default = ["subnet-0354a7b7000c70808","subnet-079a9b8e58d97cae1"]
+  default = ["subnet-0eb5deb0737267f16","subnet-04561ddb551e99482"]
 }
 
 variable "security_group_description" {
@@ -83,7 +83,7 @@ variable "manage_master_user_password" {
 }
 
 variable "publicly_accessible" {
-  default = true # make sure
+  default = false # make sure
 }
 
 variable "common_tags" {
