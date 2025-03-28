@@ -1,6 +1,6 @@
 # A parameter group is a collection of engine configuration values that you set for your RDS database instance
 resource "aws_db_parameter_group" "rds_parameter_grp" {
-  name        = "rds-parameter-group"
+  name        = var.rds_parameter_grp_name
   description = "Parameter group for mysql8.0"
   family      = "mysql8.0"
   parameter {

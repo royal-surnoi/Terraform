@@ -103,6 +103,10 @@ variable "security_group_egress_config" {
 }
 
 # Amazon RDS
+variable "rds_parameter_grp_name" {
+  default = "rds-parameter-group"
+}
+
 variable "db_security_group_name" {
   default = "database"
 }
