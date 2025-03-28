@@ -28,7 +28,7 @@ resource "aws_db_instance" "mysql" {
     var.common_tags,
     var.db_tags,
     {
-        Name = local.name
+        Name = "${local.name}-db"
    }
   )
 }

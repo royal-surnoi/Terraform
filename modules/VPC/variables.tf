@@ -1,5 +1,4 @@
-variable "cidr_block" {
-  default = "10.0.0.0/16" # we can override
+variable "cidr_block" { # we can override
   type = string
 }
 

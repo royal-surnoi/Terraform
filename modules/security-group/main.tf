@@ -5,7 +5,7 @@ resource "aws_security_group" "security_group" {
   tags = merge(
     var.common_tags,
     {
-        Name = local.name
+        Name = "${local.name}"
    }
   )
 }
