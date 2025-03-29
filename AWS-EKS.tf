@@ -7,9 +7,9 @@ module "eks" {
   subnet_ids      = module.vpc.private_subnet_ids
   node_groups     = var.node_groups
 
-  project_name = var.project_name
-  environment = var.environment
-  common_tags = var.common_tags
-  cluster_tags = var.cluster_tags
+  project_name     = var.project_name
+  environment      = var.environment
+  common_tags      = var.common_tags
+  cluster_tags     = var.cluster_tags
   node_groups_tags = var.node_groups_tags
 }

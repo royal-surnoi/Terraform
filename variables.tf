@@ -6,12 +6,12 @@ variable "cidr_block" {
 variable "common_tags" {
   default = {
     project_name = "fusioniq"
-    terraform = true
+    terraform    = true
   }
 }
 
 variable "project_name" {
-  default = "fusioniq"  
+  default = "fusioniq"
 }
 variable "environment" {
   default = "dev"
@@ -25,15 +25,15 @@ variable "igt_tags" {
 }
 
 variable "cidr_public" {
-  default = ["10.0.1.0/24","10.0.2.0/24"]
+  default = ["10.0.1.0/24", "10.0.2.0/24"]
 }
 
 variable "cidr_private" {
-  default = ["10.0.11.0/24","10.0.12.0/24"]
+  default = ["10.0.11.0/24", "10.0.12.0/24"]
 }
 
 variable "cidr_database" {
-  default = ["10.0.21.0/24","10.0.22.0/24"]
+  default = ["10.0.21.0/24", "10.0.22.0/24"]
 }
 
 # Bastion variables 
@@ -47,9 +47,9 @@ variable "instance_type" {
 
 variable "ec2_tags" {
   default = {
-    Name = "bastion"
+    Name         = "bastion"
     project_name = "fusioniq"
-    terraform = true
+    terraform    = true
   }
 }
 
@@ -75,20 +75,20 @@ variable "security_group_tags" {
 variable "security_group_ingress" {
   default = {
     key1 = { # must  
-        cidr_ipv4         = "0.0.0.0/0"
-        from_port         = 22
-        ip_protocol       = "tcp"
-        to_port           = 22
+      cidr_ipv4   = "0.0.0.0/0"
+      from_port   = 22
+      ip_protocol = "tcp"
+      to_port     = 22
     }
-    key2 = { 
-        cidr_ipv4         = "0.0.0.0/0"
-        from_port         = 80
-        ip_protocol       = "tcp"
-        to_port           = 80
+    key2 = {
+      cidr_ipv4   = "0.0.0.0/0"
+      from_port   = 80
+      ip_protocol = "tcp"
+      to_port     = 80
     }
     key3 = { # make sure all traffic is required
-        cidr_ipv4         = "0.0.0.0/0"
-        ip_protocol       = "-1"
+      cidr_ipv4   = "0.0.0.0/0"
+      ip_protocol = "-1"
     }
   }
 }
@@ -96,8 +96,8 @@ variable "security_group_ingress" {
 variable "security_group_egress_config" {
   default = {
     egress_rule1 = {
-        cidr_ipv4   = "0.0.0.0/0"
-        ip_protocol = "-1"
+      cidr_ipv4   = "0.0.0.0/0"
+      ip_protocol = "-1"
     }
   }
 }
@@ -122,10 +122,10 @@ variable "db_tags" {
 variable "db_security_group_ingress" {
   default = {
     key1 = { # must  
-        cidr_ipv4         = "0.0.0.0/0"
-        from_port         = 3306
-        ip_protocol       = "tcp"
-        to_port           = 3306
+      cidr_ipv4   = "0.0.0.0/0"
+      from_port   = 3306
+      ip_protocol = "tcp"
+      to_port     = 3306
     }
   }
 }
@@ -133,8 +133,8 @@ variable "db_security_group_ingress" {
 variable "db_security_group_egress_config" {
   default = {
     egress_rule1 = {
-        cidr_ipv4   = "0.0.0.0/0"
-        ip_protocol = "-1"
+      cidr_ipv4   = "0.0.0.0/0"
+      ip_protocol = "-1"
     }
   }
 }
@@ -198,8 +198,8 @@ variable "node_groups" {
   description = "EKS node group configuration"
   default = {
     general = {
-      instance_types = ["t3.medium"]
-      capacity_type  = "SPOT"
+      instance_types  = ["t3.medium"]
+      capacity_type   = "SPOT"
       node_group_name = "fusioniq-dev-node"
       scaling_config = {
         desired_size = 2
@@ -216,4 +216,25 @@ variable "cluster_tags" {
 
 variable "node_groups_tags" {
   default = {}
+}
+
+# Route53
+variable "zone_id" {
+  type = string
+}
+
+variable "name" {
+  type = string
+}
+
+variable "type" {
+  type = string
+}
+
+variable "ttl" {
+  type = number
+}
+
+variable "records" {
+  type = list(string)
 }
