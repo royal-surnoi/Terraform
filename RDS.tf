@@ -46,7 +46,7 @@ module "aws-rds" {
   username                    = var.username
   manage_master_user_password = var.manage_master_user_password
   publicly_accessible         = var.publicly_accessible
-  vpc_security_group_ids      = [module.security_group.security_group_id]
+  vpc_security_group_ids      = [module.db_security_group.security_group_id]
   db_subnet_group_name        = aws_db_subnet_group.my_db_subnet_group.name
   parameter_group_name        = aws_db_parameter_group.rds_parameter_grp.name
   skip_final_snapshot         = var.skip_final_snapshot

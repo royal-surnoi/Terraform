@@ -195,7 +195,7 @@ terraform output
 ```
 ### **4️⃣ Connect to EKS Cluster**
 ```sh
-aws eks update-kubeconfig --name robokart --region <your-region>
+aws eks update-kubeconfig --name <cluster_name> --region <your-region>
 ```
 ✅ This allows you to interact with your EKS cluster using `kubectl`.  
 

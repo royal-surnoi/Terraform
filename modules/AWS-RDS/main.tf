@@ -17,11 +17,10 @@ resource "aws_db_instance" "mysql" {
 #   backup_window = "03:00-04:00"
 #   maintenance_window = "mon:04:00-mon:04:30"
 #   skip_final_snapshot = false
-#   monitoring_interval = 60
-#   monitoring_role_arn = aws_iam_role.rds_monitoring_role.arn
   # performance_insights_enabled = true
-
   # Associate with parameter group
+  monitoring_interval = 60
+  monitoring_role_arn = aws_iam_role.rds_monitoring_role.arn
   parameter_group_name = var.parameter_group_name
   skip_final_snapshot       = var.skip_final_snapshot
   tags = merge(
@@ -32,3 +31,50 @@ resource "aws_db_instance" "mysql" {
    }
   )
 }
+
+resource "aws_iam_role" "rds_monitoring_role" {
+  name               = "rds-monitoring-role"
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect    = "Allow"
+        Action    = "sts:AssumeRole"
+        Principal = {
+          Service = "monitoring.rds.amazonaws.com"
+        }
+      }
+    ]
+  })
+  managed_policy_arns = ["arn:aws:iam::aws:policy/service-role/AmazonRDSEnhancedMonitoringRole"]
+}
+
+# Create IAM Policy for RDS Enhanced Monitoring
+resource "aws_iam_policy" "rds_monitoring_policy" {
+  name        = "rds-monitoring-policy"
+  description = "Policy to allow Enhanced Monitoring for RDS instances"
+  policy      = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect   = "Allow"
+        Action   = [
+          "cloudwatch:PutMetricData",
+          "cloudwatch:GetMetricData",
+          "rds:DescribeDBInstances",
+          "rds:DescribeEvents",
+          "rds:DescribeDBLogFiles",
+          "rds:ListTagsForResource"
+        ]
+        Resource = "*"
+      }
+    ]
+  })
+}
+
+# Attach the policy to the role
+resource "aws_iam_role_policy_attachment" "rds_monitoring_policy_attachment" {
+  role       = aws_iam_role.rds_monitoring_role.name
+  policy_arn = aws_iam_policy.rds_monitoring_policy.arn
+}
+
