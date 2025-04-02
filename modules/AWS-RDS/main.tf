@@ -33,7 +33,7 @@ resource "aws_db_instance" "mysql" {
 }
 
 resource "aws_iam_role" "rds_monitoring_role" {
-  name               = "rds-monitoring-role"
+  name               = "rds-monitoring-role-${var.environment}"
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
@@ -51,7 +51,7 @@ resource "aws_iam_role" "rds_monitoring_role" {
 
 # Create IAM Policy for RDS Enhanced Monitoring
 resource "aws_iam_policy" "rds_monitoring_policy" {
-  name        = "rds-monitoring-policy"
+  name        = "rds-monitoring-policy-${var.environment}"
   description = "Policy to allow Enhanced Monitoring for RDS instances"
   policy      = jsonencode({
     Version = "2012-10-17"

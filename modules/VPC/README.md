@@ -25,9 +25,10 @@ This Terraform module creates a Virtual Private Cloud (VPC) suitable for a 3-tie
 
 - cidr_private (required) -  User must provide 2 valid private subnets CIDR
 
-
+- cidr_database (required) -  User must provide 2 valid database subnets CID
 ## outputs
 
 - vpc_id =  VPC id
 - private_subnet_ids = Private subnet IDs
 - public_subnet_ids = Public subnet IDs
+- database_subnet_ids = Database subnet IDs

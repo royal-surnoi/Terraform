@@ -20,8 +20,8 @@ output "security_group_id" {
   value = module.security_group.security_group_id
 }
 
-output "public_ip" {
-  value = module.ec2_instance.public_ip
+output "bastion_public_ip" {
+  value = module.ec2_instance.bastion_public_ip
 }
 
 output "key_name" {

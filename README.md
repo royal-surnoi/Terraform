@@ -193,7 +193,7 @@ terraform apply -var-file=environments/DEV/dev.tfvars
 ```
 For PROD environment:
 ```sh
-terraform apply -var-file=environments/PROD/dev.tfvars
+terraform apply -var-file=environments/PROD/prod.tfvars
 ```
 
 ### 3. **Destroy Terraform Configuration**
@@ -202,3 +202,20 @@ To destroy resources:
 terraform destroy -var-file=environments/DEV/dev.tfvars
 ```
 
+### Architecture Flow
+
+User (Internet)  
+     ↓  
+Route53
+     ↓ 
+[ALB (Public Subnet)]  
+     ↓  
+[Kubernetes Ingress (Private Subnet)]  
+     ↓  
+[Service (LoadBalancer/ClusterIP)]  
+     ↓  
+[Nginx (Reverse Proxy Pod in EKS)]  
+     ↓  
+[Backend Pod (Spring Boot)]  
+     ↓  
+[AWS RDS (MySQL) in Private Subnet]
