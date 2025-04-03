@@ -8,6 +8,6 @@ output "cluster_name" {
   value       = module.eks.cluster_name
 }
 
-output "eks_cluster_autoscaler_arn" {
-  value = module.eks.eks_cluster_autoscaler_arn
-}
+# output "eks_cluster_autoscaler_arn" {
+#   value = module.eks.eks_cluster_autoscaler_arn
+# }

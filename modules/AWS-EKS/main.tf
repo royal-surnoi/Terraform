@@ -155,7 +155,7 @@ resource "aws_eks_node_group" "main" {
     var.common_tags,
     var.node_groups_tags,
     {
-      Name = local.name
+      Name = "${local.name}" # tag checking 
    }
   )
 }
