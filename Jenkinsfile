@@ -18,7 +18,7 @@ pipeline{
             }    
             steps {
                 sh """
-                    terraform init -backend-config=environments/DEV/backend.tf
+                    terraform init -reconfigure -backend-config=environments/DEV/backend.tf
                 """
                 script {
                     if (params.operation == "Create") {
