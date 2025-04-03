@@ -18,7 +18,7 @@ pipeline{
             }    
             steps {
                 sh """
-                    sudo terraform init -backend-config=environments/"${params.enviornments}"/backend.tf
+                    terraform init
                 """
                 script {
                     if (params.operation == "Create") {
