@@ -23,10 +23,14 @@ pipeline{
                 script {
                     if (params.operation == "Create") {
                         echo 'Dev stage create'
-                         // Code for Option A
+                        sh """
+                            terraform apply -var-file=environments/"${params.enviornments}"/dev.tfvars -auto-approve
+                        """
                     } else if (params.operation == "Destroy") {
                         echo 'Dev stage destroy'
-                        // Code for Option B
+                        sh """
+                            terraform destroy -var-file=environments/"${params.enviornments}"/dev.tfvars -auto-approve
+                        """
                     }
                 }
             }        
@@ -44,9 +48,15 @@ pipeline{
                 script {
                     if (params.operation == "Create") {
                         echo 'UAT stage create'
+                        sh """
+                            terraform apply -var-file=environments/"${params.enviornments}"/uat.tfvars -auto-approve
+                        """
                          // Code for Option A
                     } else if (params.operation == "Destroy") {
                         echo 'UAT stage destroy'
+                        sh """
+                            terraform destroy -var-file=environments/"${params.enviornments}"/uat.tfvars -auto-approve
+                        """
                         // Code for Option B
                     }
                 }
@@ -66,9 +76,15 @@ pipeline{
                 script {
                     if (params.operation == "Create") {
                         echo 'Prod stage create'
+                        sh """
+                            terraform apply -var-file=environments/"${params.enviornments}"/prod.tfvars -auto-approve
+                        """
                          // Code for Option A
                     } else if (params.operation == "Destroy") {
                         echo 'Prod stage destroy'
+                        sh """
+                            terraform destroy -var-file=environments/"${params.enviornments}"/uat.tfvars -auto-approve
+                        """
                         // Code for Option B
                     }
                 }
