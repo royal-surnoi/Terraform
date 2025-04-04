@@ -11,7 +11,7 @@ pipeline{
     }
     stages{
         stage('Setup'){
-            step{
+            steps{
                 script {
                     // Validate parameters
                     if (!params.ENVIRONMENT || !params.OPERATION) {
@@ -22,9 +22,11 @@ pipeline{
             } 
         }
         stage('Terraform init'){
-            sh """
-                terraform init -reconfigure -backend-config=environments/"${params.ENVIRONMENT}"/backend.tf
-            """
+            steps{
+                sh """
+                    terraform init -reconfigure -backend-config=environments/"${params.ENVIRONMENT}"/backend.tf
+                """
+            }
         }
         stage('Terraform Apply/Destroy'){   
             steps {
