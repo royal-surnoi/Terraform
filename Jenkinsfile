@@ -35,7 +35,7 @@ pipeline{
                         echo "${params.ENVIRONMENT} stage create"
                         if (params.ENVIRONMENT == 'PROD') {
                             // Require manual approval for PROD
-                            input message: "Approve creation of PROD environment?"
+                            input message: "Approve for create PROD environment?"
                         } 
                         sh """
                             terraform apply -var-file=environments/"${params.ENVIRONMENT}"/"${params.ENVIRONMENT}".tfvars -auto-approve
@@ -43,7 +43,7 @@ pipeline{
                     } else if (params.OPERATION == "Destroy") {
                         echo "${params.ENVIRONMENT} stage destroy"
                         if (params.ENVIRONMENT == 'PROD') {
-                            input message: "Approve destruction of PROD environment?"
+                            input message: "Approve for destroy PROD environment?"
                         }
                         sh """
                             terraform destroy -var-file=environments/"${params.ENVIRONMENT}"/"${params.ENVIRONMENT}".tfvars -auto-approve
