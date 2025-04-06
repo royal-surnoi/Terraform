@@ -4,7 +4,7 @@ variable "vpc_id" {
 
 variable "subnet_ids" {
   type = list(string)
-  default = ["subnet-0c0e1c41e232e63f7","subnet-0dee57c759b54f1c5"]
+  default = ["subnet-0b2ada4cfcc744c81","subnet-07b77bea8fd390ba4"]
 }
 
 variable "security_group_description" {

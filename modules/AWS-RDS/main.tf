@@ -19,8 +19,8 @@ resource "aws_db_instance" "mysql" {
 #   skip_final_snapshot = false
   # performance_insights_enabled = true
   # Associate with parameter group
-  monitoring_interval = 60
-  monitoring_role_arn = aws_iam_role.rds_monitoring_role.arn
+  # monitoring_interval = 60
+  # monitoring_role_arn = aws_iam_role.rds_monitoring_role.arn
   parameter_group_name = var.parameter_group_name
   skip_final_snapshot       = var.skip_final_snapshot
   tags = merge(

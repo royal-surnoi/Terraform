@@ -6,7 +6,7 @@ pipeline{
         timeout(time: 1, unit: "HOURS")
     }
     parameters{
-        choice(name: 'ENVIRONMENT', choices: ['DEV', 'UAT', 'PROD'], description: 'choose the environment')
+        choice(name: 'ENVIRONMENT', choices: ['DEV', 'UAT', 'PROD'], description: 'Choose the environment')
         choice(name: 'OPERATION', choices: ['Create', 'Destroy'], description: 'Choose the operation')
     }
     stages{
@@ -52,60 +52,5 @@ pipeline{
                 }
             }        
         }
-        // stage('UAT-stage'){
-        //     when {
-        //         expression {
-        //             params.enviornments == "UAT"
-        //         }
-        //     }
-        //     steps {
-        //         sh """
-        //             terraform init -reconfigure -backend-config=environments/"${params.enviornments}"/backend.tf
-        //         """
-        //         script {
-        //             if (params.operation == "Create") {
-        //                 echo 'UAT stage create'
-        //                 sh """
-        //                     terraform apply -var-file=environments/"${params.enviornments}"/uat.tfvars -auto-approve
-        //                 """
-        //                  // Code for Option A
-        //             } else if (params.operation == "Destroy") {
-        //                 echo 'UAT stage destroy'
-        //                 sh """
-        //                     terraform destroy -var-file=environments/"${params.enviornments}"/uat.tfvars -auto-approve
-        //                 """
-        //                 // Code for Option B
-        //             }
-        //         }
-        //     }  
-        // }
-
-        // stage('Production-stage'){
-        //     when {
-        //         expression {
-        //             params.enviornments == "PROD"
-        //         }
-        //     }
-        //     steps {
-        //         sh """
-        //             terraform init -reconfigure -backend-config=environments/"${params.enviornments}"/backend.tf
-        //         """
-        //         script {
-        //             if (params.operation == "Create") {
-        //                 echo 'Prod stage create'
-        //                 sh """
-        //                     terraform apply -var-file=environments/"${params.enviornments}"/prod.tfvars -auto-approve
-        //                 """
-        //                  // Code for Option A
-        //             } else if (params.operation == "Destroy") {
-        //                 echo 'Prod stage destroy'
-        //                 sh """
-        //                     terraform destroy -var-file=environments/"${params.enviornments}"/uat.tfvars -auto-approve
-        //                 """
-        //                 // Code for Option B
-        //             }
-        //         }
-        //     }  
-        // }
     }
 }
