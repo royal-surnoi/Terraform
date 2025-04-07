@@ -5,6 +5,11 @@ pipeline{
         disableResume()
         timeout(time: 1, unit: "HOURS")
     }
+    environment {
+        AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
+        AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
+        AWS_DEFAULT_REGION = "us-east-1"
+    }
     parameters{
         choice(name: 'ENVIRONMENT', choices: ['DEV', 'UAT', 'PROD'], description: 'Choose the environment')
         choice(name: 'OPERATION', choices: ['Create', 'Destroy'], description: 'Choose the operation')
