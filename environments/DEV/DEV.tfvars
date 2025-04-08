@@ -36,9 +36,9 @@ node_groups = {
       capacity_type  = "ON_DEMAND"
       node_group_name = "fusioniq-dev-node"
       scaling_config = {
-        desired_size = 2
+        desired_size = 1
         max_size     = 5
-        min_size     = 2
+        min_size     = 1
       }
     }
 }
