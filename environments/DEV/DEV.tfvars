@@ -32,18 +32,18 @@ skip_final_snapshot= true
 # EKS
 node_groups = {
     general = {
-      instance_types = ["t2.medium"]
-      capacity_type  = "ON_DEMAND"
+      instance_types = ["t3.medium"]
+      capacity_type  = "SPOT"
       node_group_name = "fusioniq-dev-node"
       scaling_config = {
         desired_size = 1
-        max_size     = 5
+        max_size     = 3
         min_size     = 1
       }
     }
 }
 
-# Route53
+# # Route53
 # zone_id = ""
 # name = "" # domain 
 # type = "" # record type
