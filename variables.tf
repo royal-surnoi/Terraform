@@ -219,22 +219,22 @@ variable "node_groups_tags" {
 }
 
 # Route53
-variable "zone_id" {
-  type = string
-}
+# variable "zone_id" {
+#   type = string
+# }
 
-variable "name" {
-  type = string
-}
+# variable "name" {
+#   type = string
+# }
 
-variable "type" {
-  type = string
-} 
+# variable "type" {
+#   type = string
+# } 
 
-variable "ttl" {
-  type = number
-}
+# variable "ttl" {
+#   type = number
+# }
 
-variable "records" {
-  type = list(string)
-}
+# variable "records" {
+#   type = list(string)
+# }
