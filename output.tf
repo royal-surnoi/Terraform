@@ -1,27 +1,37 @@
 output "output" {
   value = <<EOF
 
-  ############################# VPC ###########################################
+################################################################################
+                             INFRASTRUCTURE SUMMARY                           
+################################################################################
+
+############################# VPC Details ######################################
   vpc_id                           ${module.vpc.vpc_id}
   public_subnet_ids                ${join(", ", module.vpc.public_subnet_ids)}
   private_subnet_ids               ${join(", ", module.vpc.private_subnet_ids)}
   database_subnet_ids              ${join(", ", module.vpc.database_subnet_ids)}
 
-  ############################# Bastion-Host #######################################
+############################# Bastion Host Info #################################
   public_ip                        ${module.ec2_instance.bastion_public_ip}
   key_pair_name                    ${module.key_pair.key_name}
-  Note: If you are creating infra with Jenkins , can find .pem in /var/lib/jenkin/workspace/<repo>
+  Note: If created via Jenkins, the .pem file is located at:
+      /var/lib/jenkins/workspace/<repo>
+      Ensure it's secured and not committed to version control.
+      bastion_ssh_cmd = "ssh -i /path/to/key.pem ec2-user@${module.ec2_instance.bastion_public_ip}"
 
-  ############################# Database ############################################
+############################# RDS (Database) Info ################################
   rds_end_point                    ${module.aws-rds.end_point}
   host_name                        ${aws_route53_record.database.name}
-  ############################# EKS ################################################
+
+############################# EKS Cluster Info  ###################################
   cluster_endpoint                 ${module.eks.cluster_endpoint}
   cluster_name                     ${module.eks.cluster_name}
-  Connect Cluster: aws eks update-kubeconfig --name ${module.eks.cluster_name} --region ${var.region}
-  ############################# Route53 ################################################
-  database_host_name               ${aws_route53_record.database.name}
-  Internet_access                  ${aws_route53_record.web.name}
+  To connect to EKS cluster:
+    aws eks update-kubeconfig --name ${module.eks.cluster_name} --region ${var.region}
+
+############################# Route53 (DNS) Info ###################################
+  database_dns_record              ${aws_route53_record.database.name}
+  frontend_dns_record              ${aws_route53_record.web.name}
 
   EOF
 }
