@@ -21,6 +21,7 @@ resource "aws_route53_zone" "public" {
 
 data "aws_db_instance" "database" {
   db_instance_identifier = module.aws-rds.identifier
+  depends_on = [module.aws-rds]
 }
 
 resource "aws_route53_record" "database" {
