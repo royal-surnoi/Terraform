@@ -1,7 +1,7 @@
 output "output" {
   value = <<EOF
 
-  ############################# VPC Info ###########################################
+  ############################# VPC ###########################################
   vpc_id                           ${module.vpc.vpc_id}
   public_subnet_ids                ${join(", ", module.vpc.public_subnet_ids)}
   private_subnet_ids               ${join(", ", module.vpc.private_subnet_ids)}
@@ -14,11 +14,14 @@ output "output" {
 
   ############################# Database ############################################
   rds_end_point                    ${module.aws-rds.end_point}
+  host_name                        ${aws_route53_record.database.name}
   ############################# EKS ################################################
   cluster_endpoint                 ${module.eks.cluster_endpoint}
   cluster_name                     ${module.eks.cluster_name}
   Connect Cluster: aws eks update-kubeconfig --name ${module.eks.cluster_name} --region ${var.region}
-
+  ############################# EKS ################################################
+  domain                           ${aws_route53_record.web.name}
+  
   EOF
 }
 
