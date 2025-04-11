@@ -19,9 +19,10 @@ output "output" {
   cluster_endpoint                 ${module.eks.cluster_endpoint}
   cluster_name                     ${module.eks.cluster_name}
   Connect Cluster: aws eks update-kubeconfig --name ${module.eks.cluster_name} --region ${var.region}
-  ############################# EKS ################################################
-  domain                           ${aws_route53_record.web.name}
-  
+  ############################# Route53 ################################################
+  database_host_name               ${aws_route53_record.database.name}
+  Internet_access                  ${aws_route53_record.web.name}
+
   EOF
 }
 
