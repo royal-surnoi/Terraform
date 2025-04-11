@@ -1,15 +1,16 @@
-# data "aws_route53_zone" "selected" {
-#   name         = var.name
-#   private_zone = true
-# }
+data "aws_route53_zone" "selected" {
+  name         = var.name
+  private_zone = true
+  vpc_id = module.vpc.vpc_id
+}
 
-# resource "aws_route53_record" "db" {
-#   zone_id = data.aws_route53_zone.selected.zone_id
-#   name    = var.environment == "prod" ? "db.${var.name}" : "${var.environment}db.${var.name}"
-#   type    = "CNAME"
-#   ttl     = "300"
-#   records = [module.aws-rds.end_point]
-# }
+resource "aws_route53_record" "db" {
+  zone_id = data.aws_route53_zone.selected.zone_id
+  name    = var.environment == "prod" ? "db.${var.name}" : "${var.environment}db.${var.name}"
+  type    = "CNAME"
+  ttl     = "300"
+  records = [module.aws-rds.end_point]
+}
 
 # resource "aws_route53_record" "web" {
 #   zone_id = var.zone_id
