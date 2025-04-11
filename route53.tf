@@ -1,22 +1,41 @@
-# data "aws_route53_zone" "selected" {
-#   name         = var.name
-#   private_zone = true
-#   vpc_id = module.vpc.vpc_id
-# }
+resource "aws_route53_zone" "private" {
+  name = "${var.project_name}.com"
+  vpc {
+    vpc_id = module.vpc.vpc_id
+  }
+  tags = {
+    project = var.project_name
+    environment = var.environment
+    terraform = true
+  }
+}
 
-# resource "aws_route53_record" "db" {
-#   zone_id = data.aws_route53_zone.selected.zone_id
-#   name    = var.environment == "prod" ? "db.${var.name}" : "${var.environment}db.${var.name}"
-#   type    = "CNAME"
-#   ttl     = "300"
-#   records = [module.aws-rds.end_point]
-# }
+resource "aws_route53_zone" "public" {
+  name = var.domain_name
+  tags = {
+    project = var.project_name
+    environment = var.environment
+    terraform = true
+  }
+}
 
-# resource "aws_route53_record" "web" {
-#   zone_id = var.zone_id
-#   name    = var.environment == "prod" ? var.name : "${var.environment}.${var.name}"
-#   type    = var.type
-#   ttl     = var.ttl
-#   records = var.records
-# }
+data "aws_db_instance" "database" {
+  db_instance_identifier = module.aws-rds.identifier
+}
+
+resource "aws_route53_record" "database" {
+  zone_id = aws_route53_zone.private.zone_id
+  name    = "${var.environment}.db.${var.project_name}.com"
+  type    = var.record_cname_type
+  ttl     = var.ttl
+  records = [data.aws_db_instance.database.address]
+}
+
+resource "aws_route53_record" "web" {
+  zone_id = aws_route53_zone.public.zone_id
+  name    = var.environment == "prod" ? var.domain_name : "${var.environment}.${var.domain_name}"
+  type    = var.record_cname_type
+  ttl     = var.ttl
+  records = [data.aws_db_instance.database.address] # for testing added
+}
 

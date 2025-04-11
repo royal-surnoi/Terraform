@@ -219,22 +219,22 @@ variable "node_groups_tags" {
 }
 
 # Route53
-# variable "zone_id" {
-#   type = string
-# }
-
-variable "name" {
+variable "domain_name" {
   type = string
+  default = "royalreddy.site" # change with project domain currently using personal
 }
 
-# variable "type" {
-#   type = string
-# } 
+variable "record_cname_type" {
+  type = string
+  default = "CNAME"
+} 
 
-# variable "ttl" {
-#   type = number
-# }
+variable "record_a_type" {
+  type = string
+  default = "A"
+}
 
-# variable "records" {
-#   type = list(string)
-# }
+variable "ttl" {
+  type = number
+  default = 60
+}

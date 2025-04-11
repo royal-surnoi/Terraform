@@ -44,9 +44,9 @@ node_groups = {
 }
 
 # # Route53
-# zone_id = "Z0147738BB59YLNW5SP3"
-name = "royalreddy.site" # domain 
-# type = "A" # record type
-# ttl = 300 
-# record = [""]
+domain_name = "royalreddy.site" # domain 
+record_cname_type = "CNAME"
+record_a_type = "A"
+ttl = 60
+
 
