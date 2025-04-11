@@ -21,7 +21,7 @@ output "output" {
 
 ############################# RDS (Database) Info ################################
   rds_end_point                    ${module.aws-rds.end_point}
-  host_name                        ${aws_route53_record.database.name}
+  rds_dns_name                     ${aws_route53_record.database.name}
 
 ############################# EKS Cluster Info  ###################################
   cluster_endpoint                 ${module.eks.cluster_endpoint}
