@@ -1,5 +1,6 @@
 environment = "dev"
 project_name = "fusioniq"
+region = "us-east-1"
 
 # VPC
 cidr_block = "10.0.0.0/16"

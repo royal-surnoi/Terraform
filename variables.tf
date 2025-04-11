@@ -17,6 +17,10 @@ variable "environment" {
   default = "dev"
 }
 
+variable "region" {
+  default = "us-east-1"
+}
+
 variable "vpc_tags" {
   default = {}
 }

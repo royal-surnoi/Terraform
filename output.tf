@@ -1,5 +1,6 @@
-output "vpc" {
+output "output" {
   value = <<EOF
+  
   ############################# VPC Info ###########################################
   vpc_id                           ${module.vpc.vpc_id}
   public_subnet_ids                ${join(", ", module.vpc.public_subnet_ids)}
@@ -8,14 +9,16 @@ output "vpc" {
 
   ############################# Bastion-Host #######################################
   public_ip                        ${module.ec2_instance.bastion_public_ip}
+  key_pair_name                    ${module.key_pair.key_name}
   Note: If you are creating infra with Jenkins , can find .pem in /var/lib/jenkin/workspace/<repo>
 
   ############################# Database ############################################
   rds_end_point                    ${module.aws-rds.end_point}
-
   ############################# EKS ################################################
   cluster_endpoint                 ${module.eks.cluster_endpoint}
   cluster_name                     ${module.eks.cluster_name}
+  Connect Cluster: aws eks update-kubeconfig --name ${module.eks.cluster_name} --region ${var.region}
+
   EOF
 }
 
