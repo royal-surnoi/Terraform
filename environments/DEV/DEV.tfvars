@@ -45,8 +45,8 @@ node_groups = {
 
 # # Route53
 # zone_id = ""
-# name = "" # domain 
+name = "dev" # domain 
 # type = "" # record type
-# ttl = 300 
+ttl = 300 
 # record = [""]
 
