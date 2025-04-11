@@ -1,3 +1,24 @@
+output "vpc" {
+  value = <<EOF
+  ############################# VPC Info ###########################################
+  vpc_id                           ${module.vpc.vpc_id}
+  public_subnet_ids                ${module.vpc.public_subnet_ids}
+  private_subnet_ids               ${module.vpc.private_subnet_ids}
+  database_subnet_ids              ${module.vpc.database_subnet_ids}
+
+  ############################# Bastion-Host #######################################
+  public_ip                        ${module.ec2_instance.bastion_public_ip}
+  Note: If you are creating infra with Jenkins , can find .pem in /var/lib/jenkin/workspace/<repo>
+  ############################# Database ############################################
+  rds_end_point                    ${module.aws-rds.end_point}
+  ############################# EKS ################################################
+  cluster_endpoint                 ${module.eks.cluster_endpoint}
+  cluster_name                     ${module.eks.cluster_name}
+  EOF
+}
+
+
+
 # VPC
 output "vpc_id" {
   value = module.vpc.vpc_id
