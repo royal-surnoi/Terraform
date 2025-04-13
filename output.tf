@@ -38,7 +38,7 @@ output "output" {
 
 
 
-  # frontend_dns_record              ${aws_route53_record.web.name}
+# frontend_dns_record              ${aws_route53_record.web.name}
 # # VPC
 # output "vpc_id" {
 #   value = module.vpc.vpc_id

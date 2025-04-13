@@ -186,9 +186,9 @@ variable "skip_final_snapshot" {
   default = true
 }
 
-# variable "performance_insights_enabled" {
-#   default = true
-# }
+variable "performance_insights_enabled" {
+  default = true
+}
 
 # AWS EKS 
 variable "cluster_version" {
@@ -220,6 +220,14 @@ variable "cluster_tags" {
 
 variable "node_groups_tags" {
   default = {}
+}
+
+variable "alb_ingress_version" {
+  default = "1.4.8"
+}
+
+variable "alb_ingress_image_tag" {
+  default = "v2.10.1"
 }
 
 # Route53
