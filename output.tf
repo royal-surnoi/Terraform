@@ -31,14 +31,14 @@ output "output" {
 
 ############################# Route53 (DNS) Info ###################################
   database_dns_record              ${aws_route53_record.database.name}
-  frontend_dns_record              ${aws_route53_record.web.name}
+
 
   EOF
 }
 
 
 
-
+  # frontend_dns_record              ${aws_route53_record.web.name}
 # # VPC
 # output "vpc_id" {
 #   value = module.vpc.vpc_id
