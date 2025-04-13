@@ -112,6 +112,10 @@ locals {
   oidc_provider_url = replace(var.oidc_provider_arn, "arn:aws:iam::[0-9]+:oidc-provider/", "")
 }
 
+output "oidc_provider_url" {
+  value = local.oidc_provider_url
+}
+
 resource "aws_iam_role" "alb_ingress" {
   name = "${var.cluster_name}-alb-ingress-role"
 
