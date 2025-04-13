@@ -108,25 +108,31 @@ resource "kubernetes_cluster_role_binding" "alb_ingress_controller" {
 # }
 
 # IAM Role for ALB Ingress Controller
+locals {
+  oidc_provider_url = replace(var.oidc_provider_arn, "arn:aws:iam::[0-9]+:oidc-provider/", "")
+}
+
 resource "aws_iam_role" "alb_ingress" {
   name = "${var.cluster_name}-alb-ingress-role"
+
   assume_role_policy = jsonencode({
-    Version = "2012-10-17"
+    Version = "2012-10-17",
     Statement = [{
-      Effect = "Allow"
+      Effect = "Allow",
       Principal = {
         Federated = var.oidc_provider_arn
-      }
-      Action = "sts:AssumeRoleWithWebIdentity"
+      },
+      Action = "sts:AssumeRoleWithWebIdentity",
       Condition = {
         StringEquals = {
-          "${replace(var.oidc_provider_arn, "arn:aws:iam::[0-9]+:oidc-provider/", "")}:sub" = "system:serviceaccount:kube-system:alb-ingress-controller"
-          "${replace(var.oidc_provider_arn, "arn:aws:iam::[0-9]+:oidc-provider/", "")}:aud" = "sts.amazonaws.com"
+          "${local.oidc_provider_url}:sub" = "system:serviceaccount:kube-system:alb-ingress-controller",
+          "${local.oidc_provider_url}:aud" = "sts.amazonaws.com"
         }
       }
     }]
   })
 }
+
 
 # IAM Policy for ALB Ingress Controller
 resource "aws_iam_policy" "alb_ingress" {
