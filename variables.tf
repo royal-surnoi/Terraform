@@ -224,21 +224,21 @@ variable "node_groups_tags" {
 
 # Route53
 variable "domain_name" {
-  type = string
+  type    = string
   default = "royalreddy.site" # change with project domain currently using personal
 }
 
 variable "record_cname_type" {
-  type = string
+  type    = string
   default = "CNAME"
-} 
+}
 
 variable "record_a_type" {
-  type = string
+  type    = string
   default = "A"
 }
 
 variable "ttl" {
-  type = number
+  type    = number
   default = 60
 }

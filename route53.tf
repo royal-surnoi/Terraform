@@ -4,24 +4,29 @@ resource "aws_route53_zone" "private" {
     vpc_id = module.vpc.vpc_id
   }
   tags = {
-    project = var.project_name
+    project     = var.project_name
     environment = var.environment
-    terraform = true
+    terraform   = true
   }
 }
 
-resource "aws_route53_zone" "public" {
-  name = var.domain_name
-  tags = {
-    project = var.project_name
-    environment = var.environment
-    terraform = true
-  }
+# resource "aws_route53_zone" "public" {
+#   name = var.domain_name
+#   tags = {
+#     project     = var.project_name
+#     environment = var.environment
+#     terraform   = true
+#   }
+# }
+
+
+data "aws_route53_zone" "public" {
+  name         = var.domain_name
 }
 
 data "aws_db_instance" "database" {
   db_instance_identifier = module.aws-rds.identifier
-  depends_on = [module.aws-rds]
+  depends_on             = [module.aws-rds]
 }
 
 resource "aws_route53_record" "database" {
@@ -33,7 +38,7 @@ resource "aws_route53_record" "database" {
 }
 
 resource "aws_route53_record" "web" {
-  zone_id = aws_route53_zone.public.zone_id
+  zone_id = data.aws_route53_record.public.zone_id
   name    = var.environment == "prod" ? var.domain_name : "${var.environment}.${var.domain_name}"
   type    = var.record_cname_type
   ttl     = var.ttl
