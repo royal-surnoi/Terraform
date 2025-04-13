@@ -108,6 +108,10 @@ resource "kubernetes_cluster_role_binding" "alb_ingress_controller" {
 # }
 
 # IAM Role for ALB Ingress Controller
+
+variable "oidc_provider_arn" {
+  default = "arn:aws:iam::724772063998:oidc-provider/oidc.eks.us-east-1.amazonaws.com/id/79F03D0B88CFB44891A0432141D124AD"
+}
 locals {
   oidc_provider_url = replace(var.oidc_provider_arn, "arn:aws:iam::[0-9]+:oidc-provider/", "")
 }
