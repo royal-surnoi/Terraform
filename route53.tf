@@ -20,9 +20,9 @@ resource "aws_route53_zone" "private" {
 # }
 
 
-data "aws_route53_zone" "public" {
-  name         = var.domain_name
-}
+# data "aws_route53_zone" "public" {
+#   name         = var.domain_name
+# }
 
 data "aws_db_instance" "database" {
   db_instance_identifier = module.aws-rds.identifier
@@ -37,11 +37,11 @@ resource "aws_route53_record" "database" {
   records = [data.aws_db_instance.database.address]
 }
 
-resource "aws_route53_record" "web" {
-  zone_id = data.aws_route53_record.public.zone_id
-  name    = var.environment == "prod" ? var.domain_name : "${var.environment}.${var.domain_name}"
-  type    = var.record_cname_type
-  ttl     = var.ttl
-  records = [data.aws_db_instance.database.address] # for testing added
-}
+# resource "aws_route53_record" "web" {
+#   zone_id = data.aws_route53_record.public.zone_id
+#   name    = var.environment == "prod" ? var.domain_name : "${var.environment}.${var.domain_name}"
+#   type    = var.record_cname_type
+#   ttl     = var.ttl
+#   records = [data.aws_db_instance.database.address] # for testing added
+# }
 
