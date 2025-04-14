@@ -20,7 +20,7 @@ variable "cluster_ca_certificate" {
 
 variable "alb_ingress_version" {
   description = "Helm chart version for ALB Ingress Controller"
-  default     = "1.4.8"
+  default     = "2.7.1"
 }
 
 # variable "alb_ingress_image_tag" {
