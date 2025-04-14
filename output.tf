@@ -36,13 +36,13 @@ output "output" {
   EOF
 }
 
-output "oidc_provider_arn" {
-  value = module.eks.oidc_provider_arn
-}
+# output "oidc_provider_arn" {
+#   value = module.eks.oidc_provider_arn
+# }
 
-output "oidc_provider_url" {
-  value = module.ALB-Ingress.oidc_provider_url
-}
+# output "oidc_provider_url" {
+#   value = module.ALB-Ingress.oidc_provider_url
+# }
 # frontend_dns_record              ${aws_route53_record.web.name}
 # # VPC
 # output "vpc_id" {
