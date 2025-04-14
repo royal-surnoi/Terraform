@@ -89,6 +89,12 @@ provider "helm" {
     }
   }
 }
+resource "kubernetes_service_account" "aws_load_balancer_controller" {
+  metadata {
+    name      = "aws-load-balancer-controller"
+    namespace = "kube-system"
+  }
+}
 
 # Update Helm release to depend on RBAC resources
 resource "helm_release" "alb_ingress" {
