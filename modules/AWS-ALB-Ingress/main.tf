@@ -44,7 +44,7 @@ resource "aws_iam_role" "alb_ingress" {
       Action = "sts:AssumeRoleWithWebIdentity",
       Condition = {
         StringEquals = {
-          "${local.oidc_provider_url}:sub" = "system:serviceaccount:kube-system:alb-ingress-controller",
+          "${local.oidc_provider_url}:sub" = "system:serviceaccount:kube-system:aws-load-balancer-controller",
           "${local.oidc_provider_url}:aud" = "sts.amazonaws.com"
         }
       }
@@ -63,7 +63,7 @@ resource "helm_release" "alb_ingress" {
   name       = "aws-load-balancer-controller"
   repository = "https://aws.github.io/eks-charts"
   chart      = "aws-load-balancer-controller"
-  version    = var.alb_ingress_version
+  version    = "2.7.1" # Upgraded from var.alb_ingress_version
   namespace  = "kube-system"
 
   set {
@@ -76,7 +76,7 @@ resource "helm_release" "alb_ingress" {
   }
   set {
     name  = "serviceAccount.name"
-    value = "alb-ingress-controller"
+    value = "aws-load-balancer-controller"
   }
   set {
     name  = "serviceAccount.annotations.eks\\.amazonaws\\.com/role-arn"
@@ -85,6 +85,10 @@ resource "helm_release" "alb_ingress" {
   set {
     name  = "vpcId"
     value = var.vpc_id
+  }
+  set {
+    name  = "region"
+    value = "us-east-1"
   }
   set {
     name  = "rbac.create"
