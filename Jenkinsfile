@@ -64,24 +64,34 @@ pipeline {
                 script {
                     // Install required tools
                     sh '''
+                       # Create bin directory
+                        mkdir -p $HOME/bin
+
                         # Install kubectl
-                        curl -LO "https://dl.k8s.io/release/v1.21.0/bin/linux/amd64/kubectl"
+                        curl -LO https://dl.k8s.io/release/v1.21.0/bin/linux/amd64/kubectl
                         chmod +x kubectl
-                        sudo mv kubectl /usr/local/bin/
+                        mv kubectl $HOME/bin/
 
                         # Install helm
                         curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
                         chmod 700 get_helm.sh
-                        ./get_helm.sh
+                        ./get_helm.sh --no-sudo
+                        mv $HOME/.local/bin/helm $HOME/bin/
                         rm get_helm.sh
 
                         # Install eksctl
                         curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
-                        sudo mv /tmp/eksctl /usr/local/bin
+                        mv /tmp/eksctl $HOME/bin/
 
                         # Install jq
-                        sudo apt-get update
-                        sudo apt-get install -y jq
+                        curl -L -o $HOME/bin/jq https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64
+                        chmod +x $HOME/bin/jq
+
+                        # Verify tools
+                        kubectl version --client
+                        helm version
+                        eksctl version
+                        jq --version
                     '''
 
                     // Extract Terraform outputs
