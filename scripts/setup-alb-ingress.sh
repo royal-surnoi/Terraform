@@ -142,9 +142,9 @@ kubectl get pods -n "$NAMESPACE" -l app.kubernetes.io/name=aws-load-balancer-con
 check_status "Failed to list controller pods"
 
 # Wait for deployment rollout
-# echo "Waiting for controller deployment to be ready..."
-# kubectl -n "$NAMESPACE" rollout status deployment aws-load-balancer-controller --timeout=300s
-# check_status "Controller deployment rollout failed"
+echo "Waiting for controller deployment to be ready..."
+kubectl -n "$NAMESPACE" rollout status deployment aws-load-balancer-controller --timeout=300s
+check_status "Controller deployment rollout failed"
 
 # Step 10: Tag subnets for ALB discovery
 echo "Tagging subnets for ALB discovery..."

@@ -113,6 +113,11 @@ pipeline {
                         chmod +x scripts/setup-alb-ingress.sh
                         ./scripts/setup-alb-ingress.sh
                     '''
+
+                    sh '''
+                        kubectl rollout status deployment aws-load-balancer-controller -n kube-system --timeout=300s
+                        kubectl get pods -n kube-system -l app.kubernetes.io/name=aws-load-balancer-controller
+                    '''
                 }
             }
         }
