@@ -63,7 +63,7 @@ resource "helm_release" "alb_ingress" {
   name       = "aws-load-balancer-controller"
   repository = "https://aws.github.io/eks-charts"
   chart      = "aws-load-balancer-controller"
-  version    = "2.7.1" # Upgraded from var.alb_ingress_version
+  version    = "1.9.2" # Upgraded from var.alb_ingress_version
   namespace  = "kube-system"
 
   set {
