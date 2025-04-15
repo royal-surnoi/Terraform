@@ -32,9 +32,9 @@ skip_final_snapshot= true
 # EKS
 node_groups = {
     general = {
-      instance_types = ["t2.micro"]
-      capacity_type  = "ON_DEMAND"
-      node_group_name = "fusioniq-dev-node"
+      instance_types = ["t3.medium"]
+      capacity_type  = "SPOT"
+      node_group_name = "fusioniq-prod-node"
       scaling_config = {
         desired_size = 2
         max_size     = 4
