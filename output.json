@@ -1,0 +1,108 @@
+{
+  "account_id": {
+    "sensitive": false,
+    "type": "string",
+    "value": "724772063998"
+  },
+  "bastion_public_ip": {
+    "sensitive": false,
+    "type": "string",
+    "value": "3.83.95.81"
+  },
+  "cluster_endpoint": {
+    "sensitive": false,
+    "type": "string",
+    "value": "https://B2A22108083E629B3A5F1F41D4461A2F.sk1.us-east-1.eks.amazonaws.com"
+  },
+  "cluster_name": {
+    "sensitive": false,
+    "type": "string",
+    "value": "fusioniq-dev"
+  },
+  "database_subnet_ids": {
+    "sensitive": false,
+    "type": [
+      "tuple",
+      [
+        "string",
+        "string"
+      ]
+    ],
+    "value": [
+      "subnet-0b609e279c7c63051",
+      "subnet-01a2c47127d0d0f5b"
+    ]
+  },
+  "key_name": {
+    "sensitive": false,
+    "type": "string",
+    "value": "bastion.pem"
+  },
+  "output": {
+    "sensitive": false,
+    "type": "string",
+    "value": "\r\n################################################################################\r\n                             INFRASTRUCTURE SUMMARY                           \r\n################################################################################\r\n\r\n############################# VPC Details ######################################\r\n  vpc_id                           vpc-005ec4a7c93a59de8\r\n  public_subnet_ids                subnet-0d397288c93cea2f9, subnet-062631a920858caf9\r\n  private_subnet_ids               subnet-0f458011f98001453, subnet-0510f466aed7ed4dc\r\n  database_subnet_ids              subnet-0b609e279c7c63051, subnet-01a2c47127d0d0f5b\r\n\r\n############################# Bastion Host Info #################################\r\n  public_ip                        3.83.95.81\r\n  key_pair_name                    bastion.pem\r\n  Note: If created via Jenkins, the .pem file is located at:\r\n      /var/lib/jenkins/workspace/\u003crepo\u003e\r\n      Ensure it's secured and not committed to version control.\r\n      bastion_ssh_cmd = \"ssh -i /path/to/key.pem ec2-user@3.83.95.81\"\r\n\r\n############################# RDS (Database) Info ################################\r\n  rds_end_point                    fusion-dev.cox0wuaim3oy.us-east-1.rds.amazonaws.com:3306\r\n  rds_dns_name                     dev.db.fusioniq.com\r\n\r\n############################# EKS Cluster Info  ###################################\r\n  cluster_endpoint                 https://B2A22108083E629B3A5F1F41D4461A2F.sk1.us-east-1.eks.amazonaws.com\r\n  cluster_name                     fusioniq-dev\r\n  To connect to EKS cluster:\r\n    aws eks update-kubeconfig --name fusioniq-dev --region us-east-1\r\n\r\n############################# Route53 (DNS) Info ###################################\r\n  database_dns_record              dev.db.fusioniq.com\r\n"
+  },
+  "private_subnet_ids": {
+    "sensitive": false,
+    "type": [
+      "tuple",
+      [
+        "string",
+        "string"
+      ]
+    ],
+    "value": [
+      "subnet-0f458011f98001453",
+      "subnet-0510f466aed7ed4dc"
+    ]
+  },
+  "public_subnet_ids": {
+    "sensitive": false,
+    "type": [
+      "tuple",
+      [
+        "string",
+        "string"
+      ]
+    ],
+    "value": [
+      "subnet-0d397288c93cea2f9",
+      "subnet-062631a920858caf9"
+    ]
+  },
+  "rds_end_point": {
+    "sensitive": false,
+    "type": "string",
+    "value": "fusion-dev.cox0wuaim3oy.us-east-1.rds.amazonaws.com:3306"
+  },
+  "region": {
+    "sensitive": false,
+    "type": "string",
+    "value": "us-east-1"
+  },
+  "security_group_id": {
+    "sensitive": false,
+    "type": "string",
+    "value": "sg-0ff703dd219c23799"
+  },
+  "subnet_ids": {
+    "sensitive": false,
+    "type": [
+      "tuple",
+      [
+        "string",
+        "string"
+      ]
+    ],
+    "value": [
+      "subnet-0d397288c93cea2f9",
+      "subnet-062631a920858caf9"
+    ]
+  },
+  "vpc_id": {
+    "sensitive": false,
+    "type": "string",
+    "value": "vpc-005ec4a7c93a59de8"
+  }
+}

@@ -1,3 +1,7 @@
+variable "region" {
+  default = "us-east-1"
+}
+
 # VPC variables
 variable "cidr_block" {
   default = "10.0.0.0/16"
@@ -15,10 +19,6 @@ variable "project_name" {
 }
 variable "environment" {
   default = "dev"
-}
-
-variable "region" {
-  default = "us-east-1"
 }
 
 variable "vpc_tags" {
@@ -206,9 +206,9 @@ variable "node_groups" {
       capacity_type   = "SPOT"
       node_group_name = "fusioniq-dev-node"
       scaling_config = {
-        desired_size = 2
+        desired_size = 1
         max_size     = 4
-        min_size     = 2
+        min_size     = 1
       }
     }
   }

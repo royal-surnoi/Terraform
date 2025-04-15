@@ -1,3 +1,70 @@
+output "public_subnet_ids" {
+  description = "public_subnets"
+  value = module.vpc.public_subnet_ids
+}
+
+output "private_subnet_ids" {
+  description = "private_subnets"
+  value = module.vpc.private_subnet_ids
+}
+
+output "database_subnet_ids" {
+  value = module.vpc.database_subnet_ids
+}
+
+# Bastion
+output "security_group_id" {
+  value = module.security_group.security_group_id
+}
+
+output "bastion_public_ip" {
+  value = module.ec2_instance.bastion_public_ip
+}
+
+output "key_name" {
+  value = module.key_pair.key_name
+}
+
+# Amazon RDS
+output "rds_end_point" {
+  value = module.aws-rds.end_point
+}
+
+# AWS EKS
+output "cluster_endpoint" {
+  description = "EKS cluster endpoint"
+  value       = module.eks.cluster_endpoint
+}
+
+output "cluster_name" {
+  description = "EKS cluster name"
+  value       = module.eks.cluster_name
+}
+
+output "region" {
+  value = var.region
+}
+
+output "account_id" {
+  description = "AWS account ID"
+  value       = data.aws_caller_identity.current.account_id
+}
+
+output "vpc_id" {
+  value = module.vpc.vpc_id
+}
+
+output "subnet_ids" {
+  description = "public_subnets"
+  value = module.vpc.public_subnet_ids
+}
+
+data "aws_caller_identity" "current" {}
+
+
+
+
+
 output "output" {
   value = <<EOF
 
@@ -31,61 +98,5 @@ output "output" {
 
 ############################# Route53 (DNS) Info ###################################
   database_dns_record              ${aws_route53_record.database.name}
-
-
   EOF
 }
-
-# output "oidc_provider_arn" {
-#   value = module.eks.oidc_provider_arn
-# }
-
-# output "oidc_provider_url" {
-#   value = module.ALB-Ingress.oidc_provider_url
-# }
-# frontend_dns_record              ${aws_route53_record.web.name}
-# # VPC
-# output "vpc_id" {
-#   value = module.vpc.vpc_id
-# }
-
-# output "public_subnet_ids" {
-#   value = module.vpc.public_subnet_ids
-# }
-
-# output "private_subnet_ids" {
-#   value = module.vpc.private_subnet_ids
-# }
-
-# output "database_subnet_ids" {
-#   value = module.vpc.database_subnet_ids
-# }
-
-# # Bastion
-# output "security_group_id" {
-#   value = module.security_group.security_group_id
-# }
-
-# output "bastion_public_ip" {
-#   value = module.ec2_instance.bastion_public_ip
-# }
-
-# output "key_name" {
-#   value = module.key_pair.key_name
-# }
-
-# # Amazon RDS
-# output "rds_end_point" {
-#   value = module.aws-rds.end_point
-# }
-
-# # AWS EKS
-# output "cluster_endpoint" {
-#   description = "EKS cluster endpoint"
-#   value       = module.eks.cluster_endpoint
-# }
-
-# output "cluster_name" {
-#   description = "EKS cluster name"
-#   value       = module.eks.cluster_name
-# }
