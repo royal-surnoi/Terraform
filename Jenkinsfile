@@ -91,7 +91,7 @@ pipeline {
                         export REGION=$(jq -r '.region.value' outputs.json)
                         export ACCOUNT_ID=$(jq -r '.account_id.value' outputs.json)
                         export VPC_ID=$(jq -r '.vpc_id.value' outputs.json)
-                        export SUBNET_IDS=$(jq -r '.subnet_ids.value | join(" ")' outputs.json)
+                        export SUBNET_IDS=$(jq -r '.public_subnet_ids.value | join(" ")' outputs.json)
 
                         # Run the ALB setup script
                         chmod +x scripts/setup-alb-ingress.sh
