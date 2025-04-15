@@ -62,30 +62,36 @@ pipeline {
             }
             steps {
                 script {
-                    // Install required tools
-                    sh '''
-                       # Create bin directory
-                        mkdir -p $HOME/bin
+                   sh '''
+                        # Create bin directory
+                        mkdir -p /var/lib/jenkins/bin
 
-                        # Install kubectl
-                        curl -LO https://dl.k8s.io/release/v1.21.0/bin/linux/amd64/kubectl
-                        chmod +x kubectl
-                        mv kubectl $HOME/bin/
+                        # Install kubectl if not present
+                        if [ ! -f /var/lib/jenkins/bin/kubectl ]; then
+                            curl -LO https://dl.k8s.io/release/v1.21.0/bin/linux/amd64/kubectl
+                            chmod +x kubectl
+                            mv kubectl /var/lib/jenkins/bin/
+                        fi
 
-                        # Install helm
-                        curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
-                        chmod 700 get_helm.sh
-                        ./get_helm.sh --no-sudo
-                        mv $HOME/.local/bin/helm $HOME/bin/
-                        rm get_helm.sh
+                        # Install helm if not present
+                        if [ ! -f /var/lib/jenkins/bin/helm ]; then
+                            curl -LO https://get.helm.sh/helm-v3.17.3-linux-amd64.tar.gz
+                            tar -zxvf helm-v3.17.3-linux-amd64.tar.gz
+                            mv linux-amd64/helm /var/lib/jenkins/bin/
+                            rm -rf linux-amd64 helm-v3.17.3-linux-amd64.tar.gz
+                        fi
 
-                        # Install eksctl
-                        curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
-                        mv /tmp/eksctl $HOME/bin/
+                        # Install eksctl if not present
+                        if [ ! -f /var/lib/jenkins/bin/eksctl ]; then
+                            curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+                            mv /tmp/eksctl /var/lib/jenkins/bin/
+                        fi
 
-                        # Install jq
-                        curl -L -o $HOME/bin/jq https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64
-                        chmod +x $HOME/bin/jq
+                        # Install jq if not present
+                        if [ ! -f /var/lib/jenkins/bin/jq ]; then
+                            curl -L -o /var/lib/jenkins/bin/jq https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64
+                            chmod +x /var/lib/jenkins/bin/jq
+                        fi
 
                         # Verify tools
                         kubectl version --client
