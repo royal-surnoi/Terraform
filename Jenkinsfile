@@ -115,7 +115,6 @@ pipeline {
                     '''
 
                     sh '''
-                        kubectl rollout status deployment aws-load-balancer-controller -n kube-system --timeout=300s
                         kubectl get pods -n kube-system -l app.kubernetes.io/name=aws-load-balancer-controller
                     '''
                 }
