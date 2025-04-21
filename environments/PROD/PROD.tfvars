@@ -36,9 +36,9 @@ node_groups = {
       capacity_type  = "SPOT"
       node_group_name = "fusioniq-prod-node"
       scaling_config = {
-        desired_size = 2
+        desired_size = 1
         max_size     = 4
-        min_size     = 2
+        min_size     = 1
       }
     }
 }
